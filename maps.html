@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="styles.css">
+  
+    <style type="text/css">
+        html,
+        body,
+        #map_canvas {
+            margin-left: 0px;
+            padding: 0;
+            height: 100%
+        }
+
+
+
+
+        .button__badge {
+  background-color: #fa3e3e;
+  border-radius: 4px;
+  color: white;
+ 
+  padding: 2px 3px;
+  font-size: 12px;
+  
+  position: absolute; /* Position the badge within the relatively positioned button */
+  top: 0;
+  right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+        #floating-panex {
+            position: absolute;
+            top: 10px;
+            left: 2%;
+            z-index: 5;
+            background: none;
+            padding: 5px;
+
+            text-align: center;
+            font-family: 'Roboto', 'sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+        #floating-panex1 {
+            position: absolute;
+            top: 8%;
+            left: 95%;
+            z-index: 5;
+            background: none;
+            padding: 5px;
+
+            text-align: center;
+            font-family: 'Roboto', 'sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+
+
+
+
+#iw-container .iw-titlesos {
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 18px;
+	font-weight: 400;
+	padding: 10px;
+	background-color: #FF0000;
+	color: white;
+	margin: 0;
+	border-radius: 2px 2px 0 0;
+} 
+
+
+#iw-container .iw-title {
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 18px;
+	font-weight: 400;
+	padding: 10px;
+	background-color: #48b5e9;
+	color: white;
+	margin: 0;
+	border-radius: 2px 2px 0 0;
+} 
+
+.iw-subTitle {
+	font-size: 16px;
+	font-weight: 700;
+	padding: 5px 0;
+}
+
+
+
+
+
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0px;
+  background-color: #78909c;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 45px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  color: #FF0000;
+
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #78909c;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 48px;}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+    </style>
+ 
+</head>
+
+<body>
+        <div id="mySidebar" class="sidebar">SOS User Info<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><b>X</b></a>
+     <iframe src="table.html" height="1000" width="450"></iframe>
+              
+              </div>
+    <!--MAPS API-->
+    <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2AnFBo6Noz4_pR5GzT9J5r6k3Ym5_xc0&libraries=drawing"> </script>
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+        </script>
+        
+
+    <!-- FIREBASE -->
+
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-firestore.js"></script>
+
+    <!-- MATERIALIZE CSS -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
+    </script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <div id="floating-panex">
+        <div class="col s12 m7">
+            <div class="card blue-grey darken">
+                <div class="card-stacked">
+                    <div class="card-content"><b style="color: white">Safe Zones : </b>
+                        <div class="switch">
+                            <label>
+                                <input type="checkbox" onclick="SafeZoneToggle();" id="mycheck">
+                                <span class="lever"></span>
+                            </label>
+                        </div><b style="color: white">SOS : </b>
+                        <div class="switch">
+                            <label>
+                                <input type="checkbox" onclick="sos();" id="mycheck2">
+                                <span class="lever"></span>
+                            </label>
+                        </div>
+                        <b style="color: white">Hazard Zones : </b>
+                        <div class="switch">
+                            <label>
+                                <input type="checkbox" onclick="HazardZoneToggle();" id="mycheck1">
+                                <span class="lever"></span><br><br>
+                            </label>
+                             <a class="waves-effect waves-light btn" ><span class="button__badge" id="ddd">
+             
+                  </span></i>SOS</a>
+                        </div><br>
+
+                        <div>
+                            <a class="waves-effect waves-light btn" value="Save Safe Zones" id="SaveMarkerButton"><i
+                                    class="material-icons left">add_location</i>Add Zones</a><br>
+                        </div>
+                    </div>
+                    <a class="waves-effect waves-light btn" value="Save Areas" id="SaveAreasButton"><i
+                            class="material-icons left">control_point</i>Add Areas</a>
+
+                    <br>.
+                    <div>
+                        <a class="waves-effect waves-light btn red accent-4" value="Save Areas1"
+                            onclick="DeleteAllMarkers();"><i class="material-icons left">pin_drop</i>Remove All
+                            Zones</a>
+                    </div>
+                    <div><br>
+                        <a class="waves-effect waves-light btn red accent-4" value="Save Areas1"
+                            onclick="DeleteAllCircles();"><i class="material-icons left">cancel</i>Remove All Areas</a><br><br>
+                          
+                 </div><br>
+<p style="color: white">Note - ** Double Click to Remove Marker/Areas.</p>
+              <p style="color: white">** Click to Name Marker/Areas
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <div id="floating-panex1"><a class="btn-floating btn-large waves-effect waves-light red" ><i class="material-icons" onclick="back()" >arrow_back</i></a><br>
+     <br>   <a class="btn-floating btn-large waves-effect waves-light blue" ><i class="material-icons" onclick="openNav()" >arrow_back</i></a></div>
+
+
+  
+    <div id="map_canvas">
+        
+    </div>
+
+
+<script>
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>function doSomething() {
+        
+db.collection('SOS').orderBy('timestamp','desc').onSnapshot(snapshot => {
+    yourCounter = 0;    
+    let changes = snapshot.docChanges();
+    changes.forEach(change => {
+        console.log(change.doc.data());
+        yourCounter++;
+    });console.log("jinna"+yourCounter);
+    size = snapshot.size;
+    console.log(size)
+    document.getElementById("ddd").innerHTML =size;
+});
+
+        }
+     </script>
+     
+    <script>
+    
+   
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+ // document.getElementById("main").style.marginLeft= "0";
+}
+function openNav(xy) {
+  document.getElementById("mySidebar").style.width = "450px";
+
+
+
+
+}
+
+
+
+function back(){
+    window.location.href = 'index.html';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var markersxx = [];
+
+//TOGGLE SAFE ZONES FUNC
+
+function sos() {
+
+
+var icon = {
+    url: "images/sos.png", // url
+    scaledSize: new google.maps.Size(50, 60), // scaled size
+   // origin: new google.maps.Point(0,0), // origin
+  //  anchor: new google.maps.Point(0, 0) // anchor
+};
+
+    var checkBox = document.getElementById("mycheck2");
+    if (checkBox.checked == true) {
+
+        db.collection('SOS').get().then(docs => {
+            docs.forEach((coord) => {
+                const lat = coord.data().latlng.latitude;
+                const lng = coord.data().latlng.longitude;
+                let li = coord.id;
+                const sosname = coord.data().name;
+                const sostpno = coord.data().tpno;
+                const sostimestamp = coord.data().timestamp;
+                var str = sostimestamp.toDate().toString();
+str = str.substring( 0, str.indexOf("G") );
+console.log(str);
+                var mMarker = new google.maps.Marker({
+                    map: map,
+                
+                    position: { lat, lng },
+                    id: li,
+                    icon:icon
+                });
+               markersxx.push(mMarker);
+           
+                       var infowindowx = new google.maps.InfoWindow({
+
+
+                      
+                 
+                  
+                            content:'<div id="iw-container">' +
+                    '<div class="iw-titlesos" id="myP3">SOS Status</div>'+   '<div class="iw-subTitle">Status At: '+str+'</div>'+'<b>Name: </b>'+sosname+'<br><b>Telephone: </b>'+sostpno+'<br>'
+                        });
+             
+                        google.maps.event.addListener(mMarker, 'mouseover', function () {
+                            infowindowx.open(map, mMarker);
+                        });
+                        mMarker.addListener('mouseout', function() {
+           
+   
+});
+
+
+
+            })
+        })
+
+        // CLEAR MARKERS
+
+    } else {
+        for (var i = 0; i < markersxx.length; i++) {
+            markersxx[i].setMap(null);
+        }
+    }
+
+
+}
+
+
+
+
+        var markers = [];
+
+        //TOGGLE SAFE ZONES FUNC
+    
+        function SafeZoneToggle() {
+
+
+
+var icon = {
+    url: "images/safe.png", // url
+    scaledSize: new google.maps.Size(30, 30), // scaled size
+   // origin: new google.maps.Point(5,5), // origin
+   // anchor: new google.maps.Point(67, 58) // anchor
+};
+        
+            var checkBox = document.getElementById("mycheck");
+            if (checkBox.checked == true) {
+
+                db.collection('Safe Zones').get().then(docs => {
+                    docs.forEach((coord) => {
+                        const lat = coord.data().geo_point.latitude;
+                        const lng = coord.data().geo_point.longitude;
+                        let li = coord.id;
+                        const zname = coord.data().name;
+                        const chil = coord.data().pregorinf;
+                        const males = coord.data().male;
+                        const females = coord.data().female;
+                        const leftx = coord.data().left;
+                        const tot = coord.data().totalnumber;
+                        const datex = coord.data().timestamp;
+                          var strx = datex.toDate().toString();
+                        strxx = strx.substring( 0, strx.indexOf("G") );
+                        var mMarker = new google.maps.Marker({
+                            map: map,
+                            position: { lat, lng },
+                      icon:icon,
+
+
+                            id: li
+                        });
+                        
+                       markers.push(mMarker);
+                   
+
+     
+      
+
+                        // ADD SAFE ZONE NAME
+
+                        google.maps.event.addListener(mMarker, 'click', function () {
+                           // console.log(leftx);         
+                        //  openNav(leftx);
+                        x = 0
+                            update_timeout = setTimeout(function () {
+                                if (x == 0) {
+                                    var person = prompt("Please enter the Safe Zone Name:");
+
+                                    if (person == null || person == "") {
+                                        M.toast({ html: 'Cancelled!' });
+                                    }
+                                    else {
+                                        db.collection("Safe Zones").doc(coord.id).update({
+                                            name: person,
+                                        })
+                                            .then(function () {
+                                                console.log("safe zone name added");
+                                                M.toast({ html: 'Safe Zone Name Updated!' });
+                                            })
+                                    }
+                                };
+                            }, 300);
+                          
+                             
+                        });
+
+                        // DELETE SAFE ZONE 
+                
+                        google.maps.event.addListener(mMarker, 'dblclick', function () {
+                            x = 1
+                            var r = confirm("Are You Sure You Want To Delete The Safe Zone?\nPlease note that this action is irreversible!");
+                            if (r == true) {
+                                coord.ref.delete();
+                                M.toast({ html: 'Safe Zone Deleted Successfully!' });
+
+                            } else {
+                                M.toast({ html: 'Cancelled!' });
+                            }
+                        });
+
+
+                        google.maps.event.addListener(mMarker, 'dblclick', function () {
+
+                        });
+
+                        
+
+                        google.maps.event.addListener(mMarker, 'click', function () {
+
+
+                        });
+                      
+                        // MOUSEOVER INFO WINDOW DISPLAY
+        
+                        var infowindow = new google.maps.InfoWindow({
+
+
+                      
+                  
+                            content:'<div id="iw-container">' +
+                    '<div class="iw-title" id="myP2">Safe Zone Status</div>'+   '<div class="iw-subTitle">Status At: '+strxx+'</div>'+ "<b>Name: </b>"+zname+'<br><b>Pregnant/Infants: </b>'+chil+'<br><b>Male: </b>'+males+'<br><b>Female: </b>'+females+'<br><b>Amount Left: </b>'+leftx+'<br><b>Toatl Number: </b>'+tot+'<br>'
+                        });
+             
+                        google.maps.event.addListener(mMarker, 'mouseover', function () {
+                            infowindow.open(map, mMarker);
+                        });
+                        mMarker.addListener('mouseout', function() {
+           
+   
+});
+                    })
+                })
+
+                // CLEAR MARKERS
+
+            } else {
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(null);
+                }
+            }
+        }
+
+
+
+
+ 
+
+        //DELETE ALL MARKERS FUNC
+
+        function DeleteAllMarkers() {
+    
+            var r = confirm("Are You Sure You Want To Delete The Safe Zone?\nPlease note that this action is irreversible!");
+            if (r == true) {
+                db.collection('Safe Zones').get().then(docs => {
+                    docs.forEach((coord) => {
+                        let li = coord.id;
+                        console.log(li);
+                        coord.ref.delete();
+                    })
+                })
+                M.toast({ html: 'All Safe Zones Deleted Successfully!' });
+
+            } else {
+                M.toast({ html: 'Cancelled!' });
+            }
+        }
+
+
+        //DELETE ALL CIRCLES FUNC
+
+        function DeleteAllCircles() {
+
+            var r = confirm("Are You Sure You Want To Delete The Hazard Zone?\nPlease note that this action is irreversible!");
+            if (r == true) {
+
+                db.collection('Affected Areas').get().then(docs => {
+                    docs.forEach((coord) => {
+                        let li = coord.id;
+                        console.log(li);
+                        coord.ref.delete();
+                    })
+                })
+                M.toast({ html: 'All Hazard Zones Deleted Successfully!' });
+
+            } else {
+                M.toast({ html: 'Cancelled!' });
+            }
+        }
+
+        //TOGGLE HAZARD ZONES FUNC
+
+        var circleArray = [];
+        function HazardZoneToggle() {
+
+
+            var checkBox = document.getElementById("mycheck1");
+            if (checkBox.checked == true) {
+                db.collection('Affected Areas').get().then(docs => {
+                    docs.forEach((coord) => {
+                        const lat = coord.data().geo_point.latitude;
+                        const lng = coord.data().geo_point.longitude;
+                        const kav = coord.data().radius;
+                        const jina = coord.data().name;
+                
+
+                        var cityCircle = new google.maps.Circle({
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 0.8,
+                            strokeWeight: 2,
+                            fillColor: '#FF0000',
+                            fillOpacity: 0.35,
+                            map: map,
+                            clickable: true,
+                            center: { lat, lng },
+                            radius: parseFloat(kav),
+
+                        });
+                        circleArray.push(cityCircle);
+
+                           google.maps.event.addListener(cityCircle, 'click', function () {
+                            x = 0
+                            update_timeout = setTimeout(function () {
+                                
+                        // ADD SAFE ZONE NAME
+
+                                if (x == 0) {
+                                    var person = prompt("Please enter the Safe Zone Name:");
+
+                                    if (person == null || person == "") {
+                                        M.toast({ html: 'Cancelled!' });
+                                    }
+                                    else {
+                                        db.collection("Affected Areas").doc(coord.id).update({
+                                            name: person,
+                                        })
+                                            .then(function () {
+                                                console.log("sdsadsadsads");
+                                                M.toast({ html: 'Safe Zone Name Updated!' });
+                                            })
+                                    }
+
+                                };
+                            }, 300);
+                        });
+
+                        // CIRCLE DELETE LISTNER
+
+                        google.maps.event.addListener(cityCircle, 'dblclick', function () {
+                            x = 1
+                            var r = confirm("Are You Sure You Want To Delete The Hazard Zone?\nPlease note that this action is irreversible!");
+                            if (r == true) {
+                                coord.ref.delete();
+                                M.toast({ html: 'Hazard Zone Deleted Successfully!' });
+
+                            } else {
+                                M.toast({ html: 'Cancelled!' });
+                            }
+                        });
+
+                        // MOUSEOVER INFO WINDOW DISPLAY
+
+                        var infowindow = new google.maps.InfoWindow({
+                            content: jina
+                        });
+                        google.maps.event.addListener(cityCircle, 'mouseover', function () {
+                            infowindow.open(map, cityCircle);
+                            infowindow.setPosition(cityCircle.getCenter());
+                            infowindow.open(map);
+                        });
+                        cityCircle.addListener('mouseout', function() {
+    infowindow.close();
+});
+
+                    })
+                })
+
+            }
+            else {
+
+                console.log('kill' + circleArray.length);
+                for (var i = 0; i < circleArray.length; i++) {
+
+                    circleArray[i].setMap(null);
+                }
+            }
+        }
+        // real-time listener
+
+
+    </script>
+    <script>
+        //FIREBASE CONFIG
+
+        var firebaseConfig = {
+            apiKey: "AIzaSyB2AnFBo6Noz4_pR5GzT9J5r6k3Ym5_xc0",
+            authDomain: "thesavior-c6347.firebaseapp.com",
+            databaseURL: "https://thesavior-c6347.firebaseio.com",
+            projectId: "thesavior-c6347",
+            storageBucket: "thesavior-c6347.appspot.com",
+            messagingSenderId: "1086443731403",
+            appId: "1:1086443731403:web:918b92cee530c906"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore()
+    </script>
+
+    <script type="text/javascript">
+
+        var myOptions = {
+            center: new google.maps.LatLng(7.8742, 80.6511),
+            zoom: 8,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            panControl: true,
+            zoomControl: true,
+            mapTypeControl: true,
+            scaleControl: true,
+            streetViewControl: true,
+            overviewMapControl: true,
+            rotateControl: true
+        };
+
+        var map;
+        function initialize() {
+
+            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+            var drawingManager = new google.maps.drawing.DrawingManager({
+                drawingMode: null,
+                drawingControl: true,
+                drawingControlOptions: {
+                    position: google.maps.ControlPosition.TOP_CENTER,
+                    drawingModes: [google.maps.drawing.OverlayType.CIRCLE, google.maps.drawing.OverlayType.MARKER]
+                },
+                circleOptions: {
+                    editable: true
+                },
+                markerOptions: {
+                    draggable: true
+                }
+            });  
+       
+
+
+            drawingManager.setMap(map);
+            var circles = [];
+            var markers = [];
+            function eventMarkerComplete(m) {
+                marker.push(m);
+                markers = [];
+
+            }
+            function eventCircleComplete(m) {
+                circle.push(m);
+                circles = [];
+
+            }
+
+            google.maps.event.addDomListener(drawingManager, 'circlecomplete', function (circle) {
+                circles.push(circle);
+            });
+
+            google.maps.event.addDomListener(drawingManager, 'markercomplete', function (m) {
+                markers.push(m);
+            });
+            
+
+
+            google.maps.event.addDomListener(SaveMarkerButton, 'click', function () {
+                console.log(markers.length);
+
+                for (var i = 0; i < markers.length; i++) {
+                    var markerlat = markers[i].position.lat();
+                    var markerlng = markers[i].position.lng();
+
+                    //FIRESTORE SAVE MARKER
+                    var person = prompt("Please enter the Safe Zone Name:");
+                    if (person == null || person == "") {
+                        M.toast({ html: 'Cancelled!' });
+                    }
+                    else {
+
+                        console.log("sdsadsadsads");
+                        M.toast({ html: 'Safe Zone Name Updated!' });
+
+                    }
+
+                    db.collection("Safe Zones").doc().set({
+                        geo_point: new firebase.firestore.GeoPoint(markerlat, markerlng),
+                        timestamp: new firebase.firestore.FieldValue.serverTimestamp(),
+                        name:person
+                        
+                    })
+                        .then(function () {
+                            console.log("Document success lat lang");
+                            console.log(markers.length + "dd");
+                            for (var i = 0; i < markers.length; i++) {
+                                markers[i].setMap(null);
+                            }
+                            markers = [];
+                            M.toast({ html: 'Marker Saved Successfully' });
+                        })
+                        .catch(function (error) {
+                            console.error("Error ", error);
+                            M.toast({ html: 'Error' });
+                        });
+                }
+            });
+
+
+
+            google.maps.event.addDomListener(SaveAreasButton, 'click', function () {
+
+                for (var i = 0; i < circles.length; i++) {
+                    var circleCenter = circles[i].getCenter();
+                    var circleRadius = circles[i].getRadius();
+
+                    //FIRESTORE SAVE CIRCLE 
+                    var personx = prompt("Please enter the Hazard Zone Name:");
+                    if (personx == null || personx == "") {
+                        M.toast({ html: 'Cancelled!' });
+                    }
+                    else {
+
+                        console.log("sdsadsadsads");
+                        M.toast({ html: 'Hazard Zone Name Updated!' });
+
+                    }
+
+                    db.collection("Affected Areas").doc().set({
+                        geo_point: new firebase.firestore.GeoPoint(circleCenter.lat(), circleCenter.lng()),
+                        radius: circleRadius.toFixed(1),
+                        name: personx
+
+                    })
+                        .then(function () {
+
+                            console.log(circles.length + "dd");
+                            for (var i = 0; i < circles.length; i++) {
+                                circles[i].setMap(null);
+                            }
+                            circles = [];
+                            M.toast({ html: 'Zone Saved Successfully' });
+
+                        })
+                        .catch(function (error) {
+                            console.error("Error ", error);
+                        });
+
+                }
+            });
+
+
+     
+        }
+doSomething();
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+
+</body>
+
+</html>

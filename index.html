@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+       <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+       <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+      
+       <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+       <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
+     
+       <!-- Add Firebase products that you want to use -->
+       <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-auth.js"></script>
+       <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
+    <!-- Title Page-->
+    <title>Savior</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/theme.css" rel="stylesheet" media="all">
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+   
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block"  >
+            <div class="logo">
+                <a href="#">
+                    <img src="images/icon/logo.png" alt="Cool Admin" />
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="index.html">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                     
+                        </li>
+                        <li>
+                            <a href="maps.html">
+                                <i class="fas fa-map"></i>Mapping Pannel</a>
+                        </li>
+                        <li>
+                            <a href="dd.php">
+                                <i class="fas fa-bullhorn"></i>Broadcast</a>
+                        </li>
+               
+                 
+                        
+                        <li>
+                            <a href="safezoneinfo.html">
+                                <i class="fas fa-area-chart"></i>Zone Information</a>
+                        </li>
+                        
+                      
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <form class="form-header" action="" method="POST">
+                                
+                            </form>
+                            <div class="header-button">
+                                <div class="noti-wrap">
+                                    <div class="noti__item js-item-menu">
+
+                                    </div>
+                                    <div class="noti__item js-item-menu">                                           
+                                    </div>
+                                    <div class="noti__item js-item-menu">
+                                       
+                                    </div>
+                                </div>
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#" id="email"></a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                           
+                                            
+                                            <div class="account-dropdown__footer">
+                                                <a href="#" onclick="logout();">
+                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content" style="background-image: url(../images/back.jpg);">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1" style="color:black;">overview</h2>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-25">
+                            <div class="col">
+                                <div class="overview-item overview-item--c4">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-account-o"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2 id="reg">0</h2>
+                                                <span>#Users</span>
+                                            </div>
+                                           <br><br>
+                                            
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="overview-item overview-item--c2">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-home"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2 id="safezones">0</h2>
+                                                <span>#Safe Zones</span>
+                                            </div>
+                                          
+                                        </div>
+                                        <div class="text">
+                                            <P>..</P>
+                                              </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="overview-item overview-item--c3">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-alert-circle"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2 id="scanz">0</h2>
+                                                <span># SOS</span>
+                                            </div>
+                                        </div>
+                                        <div class="text">
+                                            <P>..</P>
+                                              </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                               
+                                <div class="overview-item overview-item--c1">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-map"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2 id="areas">0</h2>
+                                                <span>#Risk Zones</span>
+                                            </div>
+                                        </div>
+                                        <div class="text">
+                                            <P>..</P>
+                                              </div>
+                                        
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     
+                       
+                     <div  class="row">
+                        <div class="col-md-3">
+                            <a href="maps.html">
+                            <div class="card">
+                                <img class="card-img-top" src="images/search.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <center>  <h4 class="card-title mb-3">Mapping Pannel</h4> </center>
+                                    <p class="card-text"> <center> Mapping Tools  </center> 
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                    <div class="col-md-3">
+                        <a href="dd.php">
+                        <div class="card">
+                            <img class="card-img-top" src="images/broadcast.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <center>  <h4 class="card-title mb-3">Broadcast</h4> </center>
+                                <p class="card-text"> <center>Broadcast Alerts </center> 
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </a>
+         
+                        <div class="col-md-3">
+                            <a href="safezoneinfo.html">
+                            <div class="card">
+                                <img class="card-img-top" src="images/scanr.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                   <center> <h4 class="card-title mb-3">Zone Information</h4></center>
+                                    <p class="card-text" >   
+                                       <center> Realtime Zone Status</center>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                       
+                <div class="col-md-3">
+                            <a href="https://disasteralert.pdc.org/disasteralert/">
+                            <div class="card">
+                                <img class="card-img-top" src="images/pdc.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                   <center> <h4 class="card-title mb-3">Global Disasters</h4></center>
+                                    <p class="card-text" >   
+                                       <center> Powered by PDC </center>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                </div>
+                    </div>
+               
+                      
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+<script>
+
+
+
+
+
+    
+function logout(){
+
+    firebase.auth().signOut().then(function() {
+  console.log('Signed Out');
+}, function(error) {
+  console.error('Sign Out Error', error);
+});
+    window.location.replace("login.html");
+
+}
+
+
+
+
+</script>
+
+
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+    apiKey: "AIzaSyB2AnFBo6Noz4_pR5GzT9J5r6k3Ym5_xc0",
+    authDomain: "thesavior-c6347.firebaseapp.com",
+    databaseURL: "https://thesavior-c6347.firebaseio.com",
+    projectId: "thesavior-c6347",
+    storageBucket: "thesavior-c6347.appspot.com",
+    messagingSenderId: "1086443731403",
+    appId: "1:1086443731403:web:918b92cee530c906"
+  };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore()
+    
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    var email = user.email;
+    document.getElementById("email").innerHTML = email;
+    // ...
+  } else {
+   console.log("no yuser");
+   window.location.replace("login.html");
+  }
+});
+
+function getUserCount() {
+        
+        db.collection('Users').onSnapshot(snapshot => {
+            yourCounter = 0;    
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+         
+                yourCounter++;
+            });
+            size = snapshot.size;
+   
+            document.getElementById("reg").innerHTML =size;
+        });
+        
+                }
+               
+
+                function getSosCount() {
+        
+        db.collection('SOS').onSnapshot(snapshot => {
+            yourCounter = 0;    
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+         
+                yourCounter++;
+            });
+            size = snapshot.size;
+   
+            document.getElementById("scanz").innerHTML =size;
+        });
+        
+                }
+                function getSafeZoneCount() {
+        
+        db.collection('Safe Zones').onSnapshot(snapshot => {
+            yourCounter = 0;    
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+         
+                yourCounter++;
+            });
+            size = snapshot.size;
+   
+            document.getElementById("safezones").innerHTML =size;
+        });
+        
+                }
+                function getAffectedAreaCount() {
+        
+        db.collection('Affected Areas').onSnapshot(snapshot => {
+            yourCounter = 0;    
+            let changes = snapshot.docChanges();
+            changes.forEach(change => {
+         
+                yourCounter++;
+            });
+            size = snapshot.size;
+   
+            document.getElementById("areas").innerHTML =size;
+        });
+        
+                }
+                getAffectedAreaCount();
+                getSafeZoneCount();
+                getUserCount();
+                getSosCount();
+
+
+      </script>
+</body>
+
+</html>
+<!-- end document-->

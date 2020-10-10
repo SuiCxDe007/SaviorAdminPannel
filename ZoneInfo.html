@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+  <title>Savior Dashboard </title>
+  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
+  <!-- Bootstrap -->
+  <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+  <!-- Custom Theme Style -->
+  <link href="../build/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+
+
+          <div class="clearfix"></div>
+
+          <!-- menu profile quick info -->
+          <div class="profile clearfix">
+            <div class="profile_pic">
+              <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+              <span>Welcome</span>
+              <h2>Admin</h2>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <!-- /menu profile quick info -->
+
+          <br />
+
+          <!-- sidebar menu -->
+          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+              <h3>General</h3>
+              <ul class="nav side-menu">
+
+
+
+
+                   
+                  <li><a href="javascript:void(0)" onclick="location.href='Dashboard.html';"><i class="fa fa-home" ></i> Dashboard <span class="label label-success pull-right"></span></a></li>
+                  <li><a href="javascript:void(0)" onclick="location.href='maps.html';"><i class="fa fa-map-marker"></i> Mapping Panel <span class="label label-success pull-right"></span></a></li>
+                  <li><a href="javascript:void(0)"onclick="location.href='mapxxx.php';"><i class="fa  fa-envelope"></i> Broadcast Messege </a></li>
+                  <li><a href="javascript:void(0)"onclick="location.href='ZoneInfo.html';"><i class="fa fa-bar-chart"></i> Zone Info<span class="label label-success pull-right">Realtime</span></a></li>
+              </ul>
+            </div>
+
+          </div>
+          <!-- /sidebar menu -->
+
+          <!-- /menu footer buttons -->
+
+          <!-- /menu footer buttons -->
+        </div>
+      </div>
+
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
+
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="">
+          <div class="page-title">
+            <div class="title_left">
+              <h3>Safe Zone Info</h3>
+            </div>
+
+
+          </div>
+
+          <div class="clearfix"></div>
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Safe Zone Data - Realtime</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+
+
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+
+
+
+
+
+
+
+
+
+                  <table class="table table-hover" id="jhin">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Zone Name</th>
+                        <th>Status</th>
+                        <th>Total #</th>
+                        <th>Amount Left</th>
+                        <th>Last Updated</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Safe Zone Data Charts - Realtime</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+               
+                
+            
+                
+                    <canvas id="myChartx" height="550" width="800"></canvas>
+                    
+               <br>
+               <hr>
+               <br>
+                
+                
+                  <canvas id="myCharty" height="650" width="800"></canvas>
+               
+                  <br>
+                  <hr>
+                  <br>
+                   
+                   
+                     <canvas id="myChartz" height="650" width="800"></canvas>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- /page content -->
+
+      <!-- footer content -->
+      <footer>
+
+        <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="../vendors/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="../vendors/fastclick/lib/fastclick.js"></script>
+  <!-- NProgress -->
+  <script src="../vendors/nprogress/nprogress.js"></script>
+
+  <!-- Custom Theme Scripts -->
+  <script src="../build/js/custom.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+  <script>
+
+    
+    var config = {
+      apiKey: "AIzaSyB2AnFBo6Noz4_pR5GzT9J5r6k3Ym5_xc0",
+      authDomain: "thesavior-c6347.firebaseapp.com",
+      databaseURL: "https://thesavior-c6347.firebaseio.com",
+      projectId: "thesavior-c6347",
+      storageBucket: "thesavior-c6347.appspot.com",
+      messagingSenderId: "1086443731403",
+      appId: "1:1086443731403:web:918b92cee530c906"
+    };
+    firebase.initializeApp(config);
+    const db = firebase.firestore();
+    db.settings({ timestampsInSnapshots: true });
+
+
+
+
+
+
+var datax = [];
+var namex = [];
+var leftx = [];
+
+    function dead() {
+
+
+      db.collection('Safe Zones').onSnapshot(snapshot => {
+        yourCountera = 0;
+        let changesx = snapshot.docChanges();
+        var content = '';
+        changesx.forEach(changex => {
+
+          yourCountera++;
+          content += '<tr>';
+          var datex = changex.doc.data().timestamp.toDate().toString();
+          var xx = datex.substring(0, datex.indexOf("G"));
+          content += '<td>' + yourCountera + '</td>';
+          content += '<td>' + changex.doc.data().name + '</td>';
+          content += '<td>' + changex.doc.data().safestatus + '</td>';
+          content += '<td>' + changex.doc.data().totalnumber + '</td>';
+          content += '<td>' + changex.doc.data().left + '</td>';
+          content += '<td>' + xx + '</td>';
+          content += '</tr>';
+          var x = parseInt(changex.doc.data().totalnumber);
+          datax.push(x);
+          namex.push(changex.doc.data().name);
+          leftx.push(changex.doc.data().left);
+        });
+        console.log(datax);
+        $('#jhin').append(content);
+        chartx();
+
+      });
+
+
+
+
+
+    }
+
+    dead();
+   
+   // console.log(datax);
+
+   function chartx(){
+
+var ctx = document.getElementById("myChartx").getContext("2d");
+
+var data = {
+labels:namex,
+datasets: [
+    {
+        label: "Total #",
+        backgroundColor: [
+        'rgba(153, 102, 255, 0.2)', 
+        'rgba(153, 102, 255, 0.2)', 
+        'rgba(153, 102, 255, 0.2)', 
+        'rgba(153, 102, 255, 0.2)', 
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(153, 102, 255, 0.2)', 
+        'rgba(153, 102, 255, 0.2)', 
+        'rgba(153, 102, 255, 0.2)', 
+        'rgba(153, 102, 255, 0.2)', 
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(153, 102, 255, 0.2)'
+
+         
+         
+        ],
+     
+      
+        data: datax,
+        borderWidth: 3
+    },
+    {
+        label: "# Left",
+        backgroundColor: [
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(75, 192, 192, 0.2)'
+
+         
+         
+          
+         
+         
+        ],
+        data: leftx,
+        borderWidth: 3
+    }
+  
+]
+};
+
+var myBarChart = new Chart(ctx, {
+type: 'bar',
+data: data,
+options: {
+  responsive: false,
+    maintainAspectRatio: false,
+ 
+  title: {
+						display: true,
+						text: 'Total Number / Amount Left'
+					},
+    barValueSpacing: 10,
+    scales: {
+        yAxes: [{
+            ticks: {
+                min: 0,
+            }
+        }]
+    }
+}
+});
+
+
+
+}
+
+
+
+male = [];
+female= [];
+names=[];
+infants=[];
+
+    function deadx() {
+
+
+db.collection('Safe Zones').onSnapshot(snapshot => {
+ 
+  let changesx = snapshot.docChanges();
+ 
+  changesx.forEach(changex => {
+
+
+    male.push(changex.doc.data().male);
+    female.push(changex.doc.data().female);
+    names.push(changex.doc.data().name);
+    infants.push(changex.doc.data().pregorinf);
+  });
+
+
+ // yyy();
+charty();
+});
+
+
+
+
+
+}
+
+
+
+    deadx();
+
+
+
+function charty(){
+
+    var ctx = document.getElementById("myCharty").getContext("2d");
+
+var data = {
+    labels:names,
+    datasets: [
+        {
+            label: "Male",
+            backgroundColor: [
+                   'rgba(54, 162, 235, 0.2)',
+                   'rgba(54, 162, 235, 0.2)',
+                   'rgba(54, 162, 235, 0.2)',
+                   'rgba(54, 162, 235, 0.2)',
+                   'rgba(54, 162, 235, 0.2)',
+                   'rgba(54, 162, 235, 0.2)',
+                   'rgba(54, 162, 235, 0.2)',
+                   'rgba(54, 162, 235, 0.2)',
+                   'rgba(54, 162, 235, 0.2)',
+                   'rgba(54, 162, 235, 0.2)',
+                   'rgba(54, 162, 235, 0.2)',
+                   'rgba(54, 162, 235, 0.2)'
+            ],
+         
+          
+            data: male,
+            borderWidth: 3
+        },
+        {
+            label: "Female",
+            backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',             
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',             
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(255, 99, 132, 0.2)'
+             
+              
+             
+             
+            ],
+            data: female,
+            borderWidth: 3
+        },  {
+            label: "Infants",
+            backgroundColor: [
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+
+
+            ],
+         
+          
+            data: infants,
+            borderWidth: 3
+        }
+      
+    ]
+};
+
+var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {  responsive: false,
+    maintainAspectRatio: false,
+      title: {
+						display: true,
+						text: 'Male / Female / Infants'
+					},
+        barValueSpacing: 10,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                }
+            }]
+        }
+    }
+});
+
+
+
+}
+
+
+
+
+
+//charty();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*var database = firebase.firesotre().ref().child('Tasks');
+    database.once('value', function(snapshot){
+        if(snapshot.exists()){
+            var content = '';
+
+            snapshot.forEach(function(data){
+                var TaskTitle = data.val().TaskTitle;
+                var JobId= data.val().JobId;
+                content += '<tr>';
+                content += '<td>' + TaskTitle + '</td>'; //column1
+                content += '<td>' + JobId + '</td>';//column2
+                content += '</tr>';
+            });
+
+            $('#ex-table').append(content);
+        }
+    });*/
+  </script>
+
+
+
+
+</body>
+
+</html>

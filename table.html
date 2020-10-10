@@ -1,0 +1,38 @@
+<html>
+    <head>
+            <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-firestore.js"></script>
+        <link rel="stylesheet" href="st.css">
+    </head>
+    <body>
+
+      
+
+        <div class="content">
+
+            <form id="add-cafe-form">
+                
+            </form>
+
+            <ul id="cafe-list"></ul>
+
+        </div>
+
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyB2AnFBo6Noz4_pR5GzT9J5r6k3Ym5_xc0",
+            authDomain: "thesavior-c6347.firebaseapp.com",
+            databaseURL: "https://thesavior-c6347.firebaseio.com",
+            projectId: "thesavior-c6347",
+            storageBucket: "thesavior-c6347.appspot.com",
+            messagingSenderId: "1086443731403",
+            appId: "1:1086443731403:web:918b92cee530c906"
+            };
+            firebase.initializeApp(config);
+            const db = firebase.firestore();
+          
+        </script>
+        <script src="table.js"></script>
+    </body>
+</html>
